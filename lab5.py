@@ -127,6 +127,40 @@ def zad5(dlugosc):
     a = np.arange(dlugosc)
     a = a[::-1]
     return np.diag(a)
+
+
+def zad7(n):
+    tablica = np.diag([2 for a in range(n)])
+    for i in range(1,n):
+        tablica += np.diag([2*(i+1) for a in range(n-i)],i)
+        tablica += np.diag([2 * (i+1) for a in range(n - i)],-1*i)
+    return tablica
+
+
+def zad8(tablica,kierunek):
+    w = np.shape(tablica)[0]
+    k = np.shape(tablica)[1]
+    if kierunek == '-':
+        if w % 2 == 1:
+            print('Nie mozna podzielic')
+        else:
+            return tablica[:int(w/2),:], tablica[int(w/2):,:]
+    if kierunek == '|':
+        if k % 2 == 1:
+            print('Nie mozna podzielic')
+        else:
+            return tablica[:,:int(k/2)], tablica[:,int(k/2):]
+
+
+def zad9():
+    fibonacci = []
+    fibonacci.append(1)
+    fibonacci.append(1)
+    for i in range(23):
+        fibonacci.append(fibonacci[-1]+fibonacci[-2])
+    return np.reshape(fibonacci,(5,5))
+
+
 def main():
     a = np.arange(0, 45, 3)
     print(a)
@@ -141,10 +175,18 @@ def main():
     print(zad5(5))
 
     napis1 = np.array(list('pies'))
-    napis1 = napis1[::-1]
     napis2 = np.array(list('ptak'))
     napis3 = np.array(list('pole'))
+    wykreslanka = np.diag(napis3)
+    wykreslanka[0,:]=napis1
+    wykreslanka[:,0] = napis2
+    print(wykreslanka)
 
+    # print(zad7(3))
+    # print(zad9())
+    a = np.array([[1,2],[3,4],[5,6],[7,8]])
+    print(a)
+    print(zad8(a,'-'))
 
 
 main()
